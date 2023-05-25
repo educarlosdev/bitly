@@ -41,7 +41,7 @@ class LinkController extends Controller
     public function show(Link $link)
     {
         if ($link->user_id !== auth()->id()) {
-            return response()->json(['message' => 'not found'], 404);
+                return response()->json(['message' => 'Not found'], 404);
         }
 
         return response()->json($link);
@@ -50,7 +50,7 @@ class LinkController extends Controller
     public function update(Link $link)
     {
         if ($link->user_id !== auth()->id()) {
-            return response()->json(['message' => 'not found'], 404);
+                return response()->json(['message' => 'Not found'], 404);
         }
 
         $this->request->validate([
@@ -67,7 +67,7 @@ class LinkController extends Controller
     public function destroy(Link $link)
     {
         if ($link->user_id !== auth()->id()) {
-            return response()->json(['message' => 'not found'], 404);
+                return response()->json(['message' => 'Not found'], 404);
         }
 
         $link->delete();
