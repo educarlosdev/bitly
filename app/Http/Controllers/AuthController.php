@@ -16,19 +16,6 @@ class AuthController extends Controller
         $this->request = $request;
     }
 
-    public function update()
-    {
-        $this->request->validate([
-            'name' => ['string', 'max:255'],
-        ]);
-
-        $this->request->user()->fill($this->request->only('name'));
-
-        $this->request->user()->save();
-
-        return response()->json($this->request->user());
-    }
-
     public function login()
     {
         $this->request->validate([

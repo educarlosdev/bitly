@@ -1,7 +1,25 @@
 <script setup>
 import {useAuthStore} from "../store/auth";
+import {useUserStore} from "../store/user";
+import Swal from "sweetalert2";
 
 const auth = useAuthStore();
+const user = useUserStore();
+
+const deleteUser = () =>  {
+    Swal.fire({
+        title: 'Você tem certeza que deseja remover sua conta?',
+        text: "Ao remover você perderá tudo!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Sim, Remover!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            user.destroyUser();
+        }
+    })
+}
 </script>
 
 <template>
@@ -33,7 +51,7 @@ const auth = useAuthStore();
                             <div class="col-span-full">
                                 <label for="name" class="block text-sm font-medium leading-6 text-gray-500">Nome</label>
                                 <div class="mt-2">
-                                    <input v-model="auth.me.name" id="name" name="name" type="text" autocomplete="name" placeholder="Nome"
+                                    <input v-model="user.data.name" id="name" name="name" type="text" autocomplete="name" placeholder="Nome"
                                            class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
                                 </div>
                             </div>
@@ -44,7 +62,7 @@ const auth = useAuthStore();
                                     <div
                                         class="flex rounded-md ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-sky-500 py-2">
                                         <span class="flex select-none items-center pl-3 text-gray-400 sm:text-sm">{{
-                                                auth.me.email
+                                                user.data.email
                                             }}</span>
                                     </div>
                                 </div>
@@ -52,7 +70,7 @@ const auth = useAuthStore();
                         </div>
 
                         <div class="mt-8 flex">
-                            <button type="submit" @click.prevent="auth.updateUser()"
+                            <button type="submit" @click.prevent="user.updateUser()"
                                     class="rounded-md bg-sky-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500">
                                 Salvar
                             </button>
@@ -122,7 +140,7 @@ const auth = useAuthStore();
                     </div>
 
                     <form class="flex items-start md:col-span-2">
-                        <button type="submit"
+                        <button type="submit" @click.prevent="deleteUser"
                                 class="rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400">
                             Sim, excluir minha conta!
                         </button>

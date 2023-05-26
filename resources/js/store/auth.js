@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import axios from "axios";
 import router from '../router'
 import Swal from "sweetalert2";
+import {useUserStore} from "./user";
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -10,7 +11,7 @@ if (localStorage.getItem('accessToken')) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`;
 }
 
-export const useAuthStore = defineStore('realtorAuth', {
+export const useAuthStore = defineStore('auth', {
     state: () => ({
         me: {},
         login: {},
@@ -24,39 +25,7 @@ export const useAuthStore = defineStore('realtorAuth', {
         getMe() {
             axios.get('/api/auth/me').then(response => {
                 this.me = response.data;
-            }).catch(error => {
-                this.postLogout();
-            });
-        },
-        updateUser() {
-            axios.put(`/api/auth/${this.me.id}`, {name: this.me.name}).then(response => {
-                this.me = response.data;
-                this.errors = {};
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Atualizado com sucesso!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            }).catch(error => {
-                if (error.response.status === 422) {
-                    this.errors = error.response.data.errors;
-                } else {
-                    this.postLogout();
-                }
-            });
-        },
-        destroyUser(payload) {
-            Swal.fire({
-                icon: 'info',
-                title: 'Deletando sua conta, por favor aguarde!',
-                showConfirmButton: false
-            });
-            axios.delete(`/api/auth/${payload.id}`).then(response => {
-                setTimeout(() => {
-                    Swal.close();
-                    this.postLogout();
-                }, 2000);
+                useUserStore().data = response.data;
             }).catch(error => {
                 this.postLogout();
             });
