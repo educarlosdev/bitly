@@ -8,8 +8,6 @@ import {useAuthStore} from "../store/auth";
 const auth = useAuthStore();
 
 const user = {
-    name: 'Chelsea Hagon',
-    email: 'chelsea.hagon@example.com',
     imageUrl:
         'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
@@ -97,8 +95,8 @@ const userNavigation = [
                             <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
                         </div>
                         <div class="ml-3">
-                            <div class="text-base font-medium text-gray-800">{{ user.name }}</div>
-                            <div class="text-sm font-medium text-gray-500">{{ user.email }}</div>
+                            <div class="text-base font-medium text-gray-800">{{ auth.me.name }}</div>
+                            <div class="text-sm font-medium text-gray-500">{{ auth.me.email }}</div>
                         </div>
                         <button type="button" class="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2">
                             <span class="sr-only">View notifications</span>
