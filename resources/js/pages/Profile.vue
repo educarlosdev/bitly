@@ -72,34 +72,40 @@ const auth = useAuthStore();
                                 <label for="current-password" class="block text-sm font-medium leading-6 text-gray-500">Senha
                                     atual</label>
                                 <div class="mt-2">
-                                    <input id="current-password" name="current_password" type="password"
+                                    <input v-model="auth.changePassword.current_password" id="current-password" name="current_password" type="password"
                                            autocomplete="current-password" placeholder="Senha atual"
                                            class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
                                 </div>
+                                <p v-if="auth.errors.current_password" class="mt-1 text-sm text-red-600 animate-in-left">
+                                    {{ auth.errors.current_password.join(" ") }}</p>
                             </div>
 
                             <div class="col-span-full">
                                 <label for="new-password" class="block text-sm font-medium leading-6 text-gray-500">Nova
                                     senha</label>
                                 <div class="mt-2">
-                                    <input id="new-password" name="new_password" type="password"
+                                    <input v-model="auth.changePassword.password" id="new-password" name="new_password" type="password"
                                            autocomplete="new-password" placeholder="Nova senha"
                                            class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
                                 </div>
+                                <p v-if="auth.errors.password" class="mt-1 text-sm text-red-600 animate-in-left">
+                                    {{ auth.errors.password.join(" ") }}</p>
                             </div>
 
                             <div class="col-span-full">
                                 <label for="confirm-password" class="block text-sm font-medium leading-6 text-gray-500">Confirme a nova senha</label>
                                 <div class="mt-2">
-                                    <input id="confirm-password" name="confirm_password" type="password"
+                                    <input v-model="auth.changePassword.password_confirmation" id="confirm-password" name="confirm_password" type="password"
                                            autocomplete="new-password" placeholder="Confirme a nova senha"
                                            class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
                                 </div>
+                                <p v-if="auth.errors.password" class="mt-1 text-sm text-red-600 animate-in-left">
+                                    {{ auth.errors.password.join(" ") }}</p>
                             </div>
                         </div>
 
                         <div class="mt-8 flex">
-                            <button type="submit"
+                            <button type="submit" @click.prevent="auth.postChangePassword()"
                                     class="rounded-md bg-sky-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500">
                                 Alterar
                             </button>

@@ -65,4 +65,18 @@ class AuthController extends Controller
     {
         return response()->json($this->request->user());
     }
+
+    public function changePassword()
+    {
+        $validated = $this->request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'confirmed'],
+        ]);
+
+        $this->request->user()->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return response()->json([], 204);
+    }
 }

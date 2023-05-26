@@ -206,8 +206,8 @@ export const useAuthStore = defineStore('realtorAuth', {
                 this.postLogout();
             });
         },
-        postChangePassword(payload) {
-            axios.post(`/api/auth/change-password`, payload).then(response => {
+        postChangePassword() {
+            axios.post(`/api/auth/change-password`, this.changePassword).then(response => {
                 this.changePassword = {}
                 this.errors = {}
                 Swal.fire({
