@@ -25,3 +25,4 @@ Route::prefix('auth')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('links', LinkController::class);
 });
+//G R HESPANHOL COMERCIO DE COMBUSTIVEIS E SERVICOS LTDA
