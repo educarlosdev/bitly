@@ -16,6 +16,19 @@ class AuthController extends Controller
         $this->request = $request;
     }
 
+    public function update()
+    {
+        $this->request->validate([
+            'name' => ['string', 'max:255'],
+        ]);
+
+        $this->request->user()->fill($this->request->only('name'));
+
+        $this->request->user()->save();
+
+        return response()->json($this->request->user());
+    }
+
     public function login()
     {
         $this->request->validate([
@@ -38,17 +51,17 @@ class AuthController extends Controller
         return response()->json(['email' => $user->email, 'access_token' => $token->plainTextToken]);
     }
 
-    public function register(Request $request)
+    public function register()
     {
-        $request->validate([
+        $this->request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed'],
         ]);
 
         $user = new User;
-        $user->fill($request->all());
-        $user->password = Hash::make($request->password);
+        $user->fill($this->request->all());
+        $user->password = Hash::make($this->request->password);
         $user->save();
 
         return response()->json(['email' => $user->email]);

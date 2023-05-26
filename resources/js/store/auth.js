@@ -28,8 +28,8 @@ export const useAuthStore = defineStore('realtorAuth', {
                 this.postLogout();
             });
         },
-        updateUser(payload) {
-            axios.put(`/api/auth/${payload.id}`, payload).then(response => {
+        updateUser() {
+            axios.put(`/api/auth/${this.me.id}`, {name: this.me.name}).then(response => {
                 this.me = response.data;
                 this.errors = {};
                 Swal.fire({
