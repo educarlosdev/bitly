@@ -4,13 +4,14 @@ import {
     TrashIcon,
     EllipsisVerticalIcon,
     PencilIcon,
+    LinkIcon,
     DocumentDuplicateIcon
 } from '@heroicons/vue/24/outline';
 </script>
 
 <template>
     <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <ul role="list">
+        <ul role="list" v-if="false">
             <li v-for="discussion in 10" :key="discussion"
                 class="relative flex justify-between gap-x-3 py-8 bg-white rounded-md mb-4">
                 <div class="flex items-center">
@@ -42,6 +43,10 @@ import {
                 </dl>
             </li>
         </ul>
+        <button v-else type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
+            <LinkIcon class="h-12 w-12 mx-auto text-gray-400" aria-hidden="true"/>
+            <span class="mt-2 block text-sm font-semibold text-gray-900">Criar novo link encurtado</span>
+        </button>
     </div>
 </template>
 

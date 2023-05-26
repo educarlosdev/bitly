@@ -27,7 +27,12 @@ const userNavigation = [
                 <div class="relative flex justify-between lg:gap-8 xl:grid xl:grid-cols-12">
                     <div class="flex md:absolute md:inset-y-0 md:left-0 lg:static xl:col-span-2">
                         <div class="flex flex-shrink-0 items-center text-gray-500 hover:text-gray-900 text-2xl">
-                            <router-link :to="{name: 'Dashboard'}">Bitly</router-link>
+                            <router-link :to="{name: 'Dashboard'}" class="flex">
+                                <img class="block h-8 w-auto pr-2" src="/images/icon.png" alt="Bitly" />
+                                <span class="hidden lg:flex">
+                                    Bitly
+                                </span>
+                            </router-link>
                         </div>
                     </div>
                     <div class="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
