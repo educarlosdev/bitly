@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SpaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,13 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{link:slug}', function (\App\Models\Link $link) {
-    $hit = new \App\Models\Hit();
-    $hit->ip = request()->ip();
-    $hit->user_agent = request()->userAgent();
-    $link->hits()->save($hit);
+Route::get('/{any}', [SpaController::class, 'index'])
+    ->where('any', '.*');
 
-    $link->increment('views');
-
-    return redirect()->to($link->url);
-});
+Route::get('/{link:slug}', [SpaController::class, 'show']);
