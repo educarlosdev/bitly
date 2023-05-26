@@ -2,11 +2,39 @@
 import {useAuthStore} from "../store/auth";
 import {useUserStore} from "../store/user";
 import Swal from "sweetalert2";
+import {useAvatarStore} from "../store/avatar";
 
 const auth = useAuthStore();
+const avatar = useAvatarStore();
 const user = useUserStore();
 
-const deleteUser = () =>  {
+const openInputFile = () => {
+    document.getElementById('avatar').click()
+}
+
+const storeAvatar = event => {
+    if (event.target.files.length === 1) {
+        avatar.storeAvatar({
+            avatar: event.target.files[0],
+        });
+    }
+}
+
+const deleteAvatar = () => {
+    Swal.fire({
+        title: 'Remover foto de perfil?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'Sim, Remover!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            avatar.destroyAvatar();
+        }
+    });
+}
+
+const deleteUser = () => {
     Swal.fire({
         title: 'Você tem certeza que deseja remover sua conta?',
         text: "Ao remover você perderá tudo!",
@@ -36,22 +64,38 @@ const deleteUser = () =>  {
                     <form class="md:col-span-2">
                         <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
                             <div class="col-span-full flex items-center gap-x-8">
-                                <img
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt="" class="h-24 w-24 flex-none rounded-lg bg-gray-800 object-cover"/>
-                                <div>
-                                    <button type="button"
+                                <img v-if="user.data.avatar_url"
+                                     :src="user.data.avatar_url"
+                                     alt="" class="h-24 w-24 flex-none rounded-full bg-white object-cover"/>
+                                <span v-else class="inline-block h-24 w-24 overflow-hidden rounded-full bg-gray-200">
+                                    <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                      <path
+                                          d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                    </svg>
+                                  </span>
+                                <div v-if="!user.data.avatar_url">
+                                    <button type="button" @click.prevent="openInputFile()"
                                             class="rounded-md px-3 py-2 text-sm font-semibold text-gray-500 shadow hover:bg-white">
-                                        Alterar avatar
+                                        Inserir avatar
                                     </button>
-                                    <p class="mt-2 text-xs leading-5 text-gray-400">JPG, GIF or PNG. 5MB max.</p>
+                                    <input id="avatar" name="avatar" type="file"
+                                           @change.prevent="storeAvatar($event)"
+                                           class="absolute h-full w-full cursor-pointer rounded-md border-gray-300 opacity-0">
+                                    <p class="mt-2 text-xs leading-5 text-gray-400">JPG ou PNG. 10MB máximo.</p>
+                                </div>
+                                <div v-else>
+                                    <button type="button" @click.prevent="deleteAvatar()"
+                                            class="rounded-md px-3 py-2 text-sm font-semibold text-gray-500 shadow hover:bg-white">
+                                        Remover avatar
+                                    </button>
                                 </div>
                             </div>
 
                             <div class="col-span-full">
                                 <label for="name" class="block text-sm font-medium leading-6 text-gray-500">Nome</label>
                                 <div class="mt-2">
-                                    <input v-model="user.data.name" id="name" name="name" type="text" autocomplete="name" placeholder="Nome"
+                                    <input v-model="user.data.name" id="name" name="name" type="text"
+                                           autocomplete="name" placeholder="Nome"
                                            class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
                                 </div>
                             </div>
@@ -90,11 +134,13 @@ const deleteUser = () =>  {
                                 <label for="current-password" class="block text-sm font-medium leading-6 text-gray-500">Senha
                                     atual</label>
                                 <div class="mt-2">
-                                    <input v-model="auth.changePassword.current_password" id="current-password" name="current_password" type="password"
+                                    <input v-model="auth.changePassword.current_password" id="current-password"
+                                           name="current_password" type="password"
                                            autocomplete="current-password" placeholder="Senha atual"
                                            class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
                                 </div>
-                                <p v-if="auth.errors.current_password" class="mt-1 text-sm text-red-600 animate-in-left">
+                                <p v-if="auth.errors.current_password"
+                                   class="mt-1 text-sm text-red-600 animate-in-left">
                                     {{ auth.errors.current_password.join(" ") }}</p>
                             </div>
 
@@ -102,7 +148,8 @@ const deleteUser = () =>  {
                                 <label for="new-password" class="block text-sm font-medium leading-6 text-gray-500">Nova
                                     senha</label>
                                 <div class="mt-2">
-                                    <input v-model="auth.changePassword.password" id="new-password" name="new_password" type="password"
+                                    <input v-model="auth.changePassword.password" id="new-password" name="new_password"
+                                           type="password"
                                            autocomplete="new-password" placeholder="Nova senha"
                                            class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
                                 </div>
@@ -111,9 +158,11 @@ const deleteUser = () =>  {
                             </div>
 
                             <div class="col-span-full">
-                                <label for="confirm-password" class="block text-sm font-medium leading-6 text-gray-500">Confirme a nova senha</label>
+                                <label for="confirm-password" class="block text-sm font-medium leading-6 text-gray-500">Confirme
+                                    a nova senha</label>
                                 <div class="mt-2">
-                                    <input v-model="auth.changePassword.password_confirmation" id="confirm-password" name="confirm_password" type="password"
+                                    <input v-model="auth.changePassword.password_confirmation" id="confirm-password"
+                                           name="confirm_password" type="password"
                                            autocomplete="new-password" placeholder="Confirme a nova senha"
                                            class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
                                 </div>

@@ -139,42 +139,6 @@ export const useAuthStore = defineStore('auth', {
                 }
             });
         },
-        storeProfileImage(payload) {
-            Swal.fire({
-                icon: 'info',
-                title: 'Fazendo upload da foto de perfil, por favor aguarde!',
-                showConfirmButton: false
-            })
-            let formData = new FormData();
-            formData.append(`profileImage`, payload.profileImage);
-            axios.post(`/api/auth/profile-image`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }).then(response => {
-                this.me = response.data
-                setTimeout(() => {
-                    Swal.close();
-                }, 2000);
-            }).catch(error => {
-                this.postLogout();
-            });
-        },
-        destroyProfileImage(payload) {
-            Swal.fire({
-                icon: 'info',
-                title: 'Deletando foto de perfil, por favor aguarde!',
-                showConfirmButton: false
-            })
-            axios.post(`/api/auth/profile-image`, payload).then(response => {
-                this.me = response.data
-                setTimeout(() => {
-                    Swal.close();
-                }, 1000);
-            }).catch(error => {
-                this.postLogout();
-            });
-        },
         postChangePassword() {
             axios.post(`/api/auth/change-password`, this.changePassword).then(response => {
                 this.changePassword = {}

@@ -7,11 +7,6 @@ import {useAuthStore} from "../store/auth";
 
 const auth = useAuthStore();
 
-const user = {
-    imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
-
 const navigation = [
     { name: 'Dashboard', to: {name: 'Dashboard'}, current: true },
 ]
@@ -71,7 +66,13 @@ const userNavigation = [
                             <div>
                                 <MenuButton class="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2">
                                     <span class="sr-only">Open user menu</span>
-                                    <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt="" />
+                                    <img v-if="auth.me.avatar_url" class="h-8 w-8 rounded-full" :src="auth.me.avatar_url" alt="" />
+                                    <span v-else class="inline-block h-8 w-8 overflow-hidden rounded-full bg-gray-200">
+                                    <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                      <path
+                                          d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                    </svg>
+                                  </span>
                                     <ChevronDownIcon class="relative h-5 w-5 ml-1.5 top-2 text-gray-400" aria-hidden="true" />
                                 </MenuButton>
                             </div>
@@ -97,7 +98,13 @@ const userNavigation = [
                 <div class="border-t border-gray-200 pb-3 pt-4">
                     <div class="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
                         <div class="flex-shrink-0">
-                            <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
+                            <img v-if="auth.me.avatar_url" class="h-10 w-10 rounded-full" :src="auth.me.avatar_url" alt="" />
+                            <span v-else class="inline-block h-10 w-10 overflow-hidden rounded-full bg-gray-200">
+                                    <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                      <path
+                                          d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                    </svg>
+                                  </span>
                         </div>
                         <div class="ml-3">
                             <div class="text-base font-medium text-gray-800">{{ auth.me.name }}</div>
