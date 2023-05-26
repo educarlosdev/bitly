@@ -7,9 +7,15 @@ import {
     LinkIcon,
     DocumentDuplicateIcon
 } from '@heroicons/vue/24/outline';
+import Header from "../components/Header.vue";
+import Divider from "../components/Divider.vue";
+import Stats from "../components/Stats.vue";
 </script>
 
 <template>
+    <Stats/>
+    <Divider/>
+    <Header/>
     <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <ul role="list" v-if="false">
             <li v-for="discussion in 10" :key="discussion"

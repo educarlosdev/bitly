@@ -7,6 +7,7 @@ import Login from "../pages/Login.vue";
 import Register from "../pages/Register.vue";
 import ForgotPassword from "../pages/ForgotPassword.vue";
 import Dashboard from "../pages/Dashboard.vue";
+import Profile from "../pages/Profile.vue";
 
 const routes = [
     {
@@ -17,6 +18,15 @@ const routes = [
                 path: '/dashboard',
                 name: 'Dashboard',
                 component: Dashboard,
+                meta: {
+                    requiresAuth: true,
+                    routeLogin: 'Login'
+                }
+            },
+            {
+                path: '/profile',
+                name: 'Profile',
+                component: Profile,
                 meta: {
                     requiresAuth: true,
                     routeLogin: 'Login'
@@ -62,15 +72,6 @@ const routes = [
             //     meta: {
             //         requiresAuth: false,
             //         routeDashboard: 'Dashboard'
-            //     }
-            // },
-            // {
-            //     path: '/verify-email',
-            //     name: 'VerifyEmail',
-            //     component: VerifyEmail,
-            //     meta: {
-            //         requiresAuth: true,
-            //         routeDashboard: 'Login'
             //     }
             // },
         ],

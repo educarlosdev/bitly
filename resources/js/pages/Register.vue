@@ -25,7 +25,7 @@ onMounted(() => {
                 <div class="mt-2">
                     <div class="relative">
                         <input v-model="auth.register.name" id="name" name="name" type="text" autocomplete="name"
-                               required="" :class="auth.errors.name ? 'border-red-300' : ''"
+                               required="" :class="auth.errors.name ? 'border-red-300' : ''" placeholder="Nome"
                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"/>
                         <div v-show="auth.errors.name"
                              class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 animate-in-left">
@@ -37,11 +37,11 @@ onMounted(() => {
                     {{ auth.errors.name.join(" ") }}</p>
             </div>
             <div>
-                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
+                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">E-mail</label>
                 <div class="mt-2">
                     <div class="relative">
                         <input v-model="auth.register.email" id="email" name="email" type="email" autocomplete="email"
-                               required="" :class="auth.errors.email ? 'border-red-300' : ''"
+                               required="" :class="auth.errors.email ? 'border-red-300' : ''" placeholder="E-mail"
                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"/>
                         <div v-show="auth.errors.email"
                              class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 animate-in-left">
@@ -60,7 +60,7 @@ onMounted(() => {
                 <div class="mt-2">
                     <div class="relative">
                         <input v-model="auth.register.password" id="password" name="password" type="password"
-                               autocomplete="current-password" required=""
+                               autocomplete="current-password" required="" placeholder="Senha"
                                :class="auth.errors.password ? 'pr-9' : 'pr-3'"
                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"/>
                         <div v-show="auth.errors.password"
@@ -75,12 +75,12 @@ onMounted(() => {
 
             <div>
                 <div class="flex items-center justify-between">
-                    <label for="password-confirmation" class="block text-sm font-medium leading-6 text-gray-900">Senha</label>
+                    <label for="password-confirmation" class="block text-sm font-medium leading-6 text-gray-900">Confirme a senha</label>
                 </div>
                 <div class="mt-2">
                     <div class="relative">
                         <input v-model="auth.register.password_confirmation" id="password-confirmation" name="password-confirmation" type="password"
-                               autocomplete="password-confirmation" required=""
+                               autocomplete="password-confirmation" required="" placeholder="Confirme a senha"
                                :class="auth.errors.password ? 'pr-9' : 'pr-3'"
                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"/>
                         <div v-show="auth.errors.password"
