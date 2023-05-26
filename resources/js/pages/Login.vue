@@ -23,30 +23,43 @@ onMounted(() => {
             <div>
                 <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
                 <div class="mt-2">
-                    <input v-model="auth.login.email" id="email" name="email" type="email" autocomplete="email" required="" :class="auth.errors.email ? 'border-red-300' : ''"
-                           class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-                    <div v-show="auth.errors.email" class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 animate-in-left">
-                        <i class='bx bxs-error-circle text-red-500' aria-hidden="true"></i>
+                    <div class="relative">
+                        <input v-model="auth.login.email" id="email" name="email" type="email" autocomplete="email"
+                               required="" :class="auth.errors.email ? 'border-red-300' : ''"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                        <div v-show="auth.errors.email"
+                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 animate-in-left">
+                            <i class='bx bxs-error-circle text-red-500' aria-hidden="true"></i>
+                        </div>
                     </div>
                 </div>
-                <p v-if="auth.errors.email" class="mt-1 text-sm text-red-600 animate-in-left">{{ auth.errors.email.join(" ") }}</p>
+                <p v-if="auth.errors.email" class="mt-1 text-sm text-red-600 animate-in-left">
+                    {{ auth.errors.email.join(" ") }}</p>
             </div>
 
             <div>
                 <div class="flex items-center justify-between">
                     <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Senha</label>
                     <div class="text-sm">
-                        <router-link :to="{name: 'ForgotPassword'}" class="font-semibold text-indigo-600 hover:text-indigo-500">Esqueceu sua senha?</router-link>
+                        <router-link :to="{name: 'ForgotPassword'}"
+                                     class="font-semibold text-indigo-600 hover:text-indigo-500">Esqueceu sua senha?
+                        </router-link>
                     </div>
                 </div>
                 <div class="mt-2">
-                    <input v-model="auth.login.password" id="password" name="password" type="password" autocomplete="current-password" required="" :class="auth.errors.password ? 'pr-9' : 'pr-3'"
-                           class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
-                    <div v-show="auth.errors.password" class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 animate-in-left">
-                        <i class='bx bxs-error-circle text-red-500' aria-hidden="true"></i>
+                    <div class="relative">
+                        <input v-model="auth.login.password" id="password" name="password" type="password"
+                               autocomplete="current-password" required=""
+                               :class="auth.errors.password ? 'pr-9' : 'pr-3'"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
+                        <div v-show="auth.errors.password"
+                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 animate-in-left">
+                            <i class='bx bxs-error-circle text-red-500' aria-hidden="true"></i>
+                        </div>
                     </div>
                 </div>
-                <p v-if="auth.errors.password" class="mt-1 text-sm text-red-600 animate-in-left">{{ auth.errors.password.join(" ") }}</p>
+                <p v-if="auth.errors.password" class="mt-1 text-sm text-red-600 animate-in-left">
+                    {{ auth.errors.password.join(" ") }}</p>
             </div>
 
             <div>
@@ -61,7 +74,7 @@ onMounted(() => {
             Não é um membro?
             {{ ' ' }}
             <router-link :to="{name: 'Register'}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                Cadastra-se
+                Cadastre-se
             </router-link>
         </p>
     </div>

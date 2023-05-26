@@ -25,11 +25,7 @@ export const useAuthStore = defineStore('realtorAuth', {
             axios.get('/api/auth/me').then(response => {
                 this.me = response.data;
             }).catch(error => {
-                if (error.response.data.message === 'Your email address is not verified.' && error.response.status === 403) {
-                    router.push({name: 'VerifyEmail'});
-                } else {
-                    this.postLogout();
-                }
+                this.postLogout();
             });
         },
         updateUser(payload) {
@@ -67,6 +63,7 @@ export const useAuthStore = defineStore('realtorAuth', {
         },
         postLogin() {
             axios.post('/api/auth/login', this.login).then(response => {
+                this.login = {};
                 localStorage.setItem("accessToken", response.data.access_token);
                 if (localStorage.getItem('back_redirect')) {
                     window.location.href = localStorage.getItem('back_redirect');
@@ -94,17 +91,20 @@ export const useAuthStore = defineStore('realtorAuth', {
         },
         postRegister() {
             axios.post('/api/auth/register', this.register).then(response => {
+                this.login = {
+                    email: this.register.email,
+                    password: this.register.password,
+                };
                 this.register = {};
                 this.errors = {};
                 Swal.fire({
                     icon: 'success',
-                    title: 'Verifique a caixa de mensagem em seu e-mail e confirme sua conta.',
+                    title: 'Cadastrado realizado com sucesso!',
                     showConfirmButton: false,
                     allowOutsideClick: false,
-                    timer: 5000
+                    timer: 1000
                 }).then(() => {
-                    this.postLogout();
-                    router.push({name: 'VerifyEmail'});
+                    this.postLogin();
                 });
             }).catch(error => {
                 if (error.response.status === 422) {
