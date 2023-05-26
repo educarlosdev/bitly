@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/{link:slug}', function (\App\Models\Link $link) {
+    $hit = new \App\Models\Hit();
+    $hit->ip = request()->ip();
+    $hit->user_agent = request()->userAgent();
+    $link->hits()->save($hit);
+
+    $link->increment('views');
+
+    return redirect()->to($link->url);
+});

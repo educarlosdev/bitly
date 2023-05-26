@@ -10,6 +10,6 @@ class LinkObserver
     public function creating(Link $link): void
     {
         $link->user_id = $link->user_id ?? auth()->id();
-        $link->slug = $link->slug ? str()->slug($link->slug)->limit(8) : str(Str::random(rand(6, 8)))->slug();
+        $link->slug = $link->slug ? str($link->slug)->slug() : str(Str::random(rand(6, 8)))->slug();
     }
 }
