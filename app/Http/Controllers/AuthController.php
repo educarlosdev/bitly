@@ -9,18 +9,25 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function store(Request $request)
+    private Request $request;
+
+    public function __construct(Request $request)
     {
-        $request->validate([
+        $this->request = $request;
+    }
+
+    public function store()
+    {
+        $this->request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
         $user = User::query()
-            ->where('email', $request->email)
+            ->where('email', $this->request->email)
             ->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($this->request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
@@ -31,8 +38,15 @@ class AuthController extends Controller
         return response()->json(['email' => $user->email, 'access_token' => $token->plainTextToken]);
     }
 
-    public function show(Request $request)
+    public function show()
     {
-        return response()->json($request->user());
+        return response()->json($this->request->user());
+    }
+
+    public function destroy()
+    {
+        $this->request->user()->tokens()->delete();
+
+        return response()->json([], 204);
     }
 }

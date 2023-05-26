@@ -16,9 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('auth')->group(function () {
-    Route::post('/token', [AuthController::class, 'store']);
+    Route::post('/login', [AuthController::class, 'store']);
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/me', [AuthController::class, 'show']);
+        Route::post('/logout', [AuthController::class, 'destroy']);
     });
 });
 
