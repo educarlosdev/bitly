@@ -16,8 +16,8 @@ const links = useLinkStore();
                     </div>
                 </router-link>
                 <ChartBarIcon class="h-5 w-5 mr-2 text-gray-400" aria-hidden="true"/>
-                <TrashIcon class="h-5 w-5 mr-2 text-gray-400" aria-hidden="true"/>
-                <PlusIcon @click.prevent="links.addModalOpen()" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer" aria-hidden="true"/>
+                <TrashIcon class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
+                <PlusIcon @click.prevent="links.addModalOpen()" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
             </div>
             <div class="flex items-center gap-x-4">
                 <ArrowsUpDownIcon class="h-5 w-5 mr-2 text-gray-400" aria-hidden="true"/>

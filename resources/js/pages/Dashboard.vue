@@ -56,9 +56,9 @@ onMounted(() => {
                     <div class="hidden md:flex gap-x-2 pr-5">
                         <span class="text-gray-300 text-xs mr-0 mt-1">{{ link.views }}</span>
                         <ArrowTrendingUpIcon class="h-4 w-4 text-gray-300 mr-3 ml-0 mt-1" aria-hidden="true"/>
-                        <DocumentDuplicateIcon @click.prevent="copy(link.slug_url)" class="h-5 w-5 text-gray-500 cursor-pointer" aria-hidden="true"/>
-                        <PencilIcon @click.prevent="links.editModalOpen(link)" class="h-5 w-5 text-gray-500 cursor-pointer" aria-hidden="true"/>
-                        <TrashIcon @click.prevent="links.destroyLink(link)" class="h-5 w-5 text-gray-500 cursor-pointer" aria-hidden="true"/>
+                        <DocumentDuplicateIcon @click.prevent="copy(link.slug_url)" class="h-5 w-5 text-gray-500 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-500" aria-hidden="true"/>
+                        <PencilIcon @click.prevent="links.editModalOpen(link)" class="h-5 w-5 text-gray-500 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-500" aria-hidden="true"/>
+                        <TrashIcon @click.prevent="links.destroyLink(link)" class="h-5 w-5 text-gray-500 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-500" aria-hidden="true"/>
                     </div>
                     <div class="md:hidden flex gap-x-2 pr-5">
                         <span class="text-gray-300 text-xs mr-0 mt-1">{{ link.views }}</span>
