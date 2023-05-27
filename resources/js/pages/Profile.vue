@@ -80,7 +80,7 @@ const deleteUser = () => {
                                     </button>
                                     <input id="avatar" name="avatar" type="file"
                                            @change.prevent="storeAvatar($event)"
-                                           class="absolute h-full w-full cursor-pointer rounded-md border-gray-300 opacity-0">
+                                           class="absolute h-0 w-0 cursor-pointer rounded-md border-gray-300 opacity-0">
                                     <p class="mt-2 text-xs leading-5 text-gray-400">JPG ou PNG. 10MB máximo.</p>
                                 </div>
                                 <div v-else>
