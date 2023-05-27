@@ -13,6 +13,7 @@ import Divider from "../components/Divider.vue";
 import Stats from "../components/Stats.vue";
 import {useLinkStore} from "../store/link";
 import Swal from "sweetalert2";
+import Pagination from "../components/Pagination.vue";
 
 const links = useLinkStore();
 
@@ -36,7 +37,7 @@ onMounted(() => {
     <Divider/>
     <Header/>
     <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <ul role="list" v-if="links.pagination.total > 0">
+        <ul role="list" v-if="links.pagination.total > 0" class="pb-16">
             <li v-for="link in links.pagination.data" :key="link.id"
                 class="relative flex justify-between gap-x-3 py-8 bg-white rounded-md mb-4">
                 <div class="flex items-center">
@@ -67,6 +68,7 @@ onMounted(() => {
                     </div>
                 </dl>
             </li>
+            <Pagination :pagination="links.pagination" v-if="links.pagination.total > links.pagination.per_page" @paginate="links.indexLinks()" />
         </ul>
         <button v-else type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
             <LinkIcon class="h-12 w-12 mx-auto text-gray-400" aria-hidden="true"/>
