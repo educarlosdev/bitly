@@ -2,7 +2,7 @@
 import {ClockIcon, LinkIcon, EyeIcon, CursorArrowRaysIcon, PresentationChartLineIcon} from '@heroicons/vue/24/outline';
 
 const stats = [
-    {name: 'Links', stat: '71'},
+    {name: 'Links', stat: 10},
     {name: 'Views', stat: '249'},
     {name: 'Clicks', stat: '53'},
     {name: 'Avg. CTR', stat: '21%'},

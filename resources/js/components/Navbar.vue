@@ -4,8 +4,10 @@ import {Menu, MenuButton, MenuItem, MenuItems, Popover, PopoverButton, PopoverPa
 import {MagnifyingGlassIcon} from "@heroicons/vue/20/solid";
 import {Bars3Icon, BellIcon, PlusIcon, XMarkIcon, ChevronDownIcon} from "@heroicons/vue/24/outline";
 import {useAuthStore} from "../store/auth";
+import {useLinkStore} from "../store/link";
 
 const auth = useAuthStore();
+const links = useLinkStore();
 
 const navigation = [
     { name: 'Dashboard', to: {name: 'Dashboard'}, current: true },
@@ -52,7 +54,7 @@ const userNavigation = [
                         </PopoverButton>
                     </div>
                     <div class="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-                        <a href="#" class="ml-5 flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2">
+                        <a href="#" @click.prevent="links.addModalOpen()" class="ml-5 flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2">
                             <span class="sr-only">Novo link</span>
                             <PlusIcon class="h-6 w-6" aria-hidden="true" />
                         </a>

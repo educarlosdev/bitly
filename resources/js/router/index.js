@@ -15,7 +15,7 @@ const routes = [
         component: AppLayout,
         children: [
             {
-                path: '/dashboard',
+                path: 'admin/dashboard',
                 name: 'Dashboard',
                 component: Dashboard,
                 meta: {
@@ -24,7 +24,7 @@ const routes = [
                 }
             },
             {
-                path: '/profile',
+                path: 'admin/profile',
                 name: 'Profile',
                 component: Profile,
                 meta: {
@@ -39,7 +39,7 @@ const routes = [
         component: AuthLayout,
         children: [
             {
-                path: '/login',
+                path: 'admin/login',
                 name: 'Login',
                 component: Login,
                 meta: {
@@ -48,7 +48,7 @@ const routes = [
                 }
             },
             {
-                path: '/register',
+                path: 'admin/register',
                 name: 'Register',
                 component: Register,
                 meta: {
@@ -57,7 +57,7 @@ const routes = [
                 }
             },
             {
-                path: '/forgot-password',
+                path: 'admin/forgot-password',
                 name: 'ForgotPassword',
                 component: ForgotPassword,
                 meta: {

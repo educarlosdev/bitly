@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->to('admin/dashboard');
 });
 
-Route::get('/{any}', [SpaController::class, 'index'])
+Route::get('admin/{any}', [SpaController::class, 'index'])
     ->where('any', '.*');
 
-Route::get('/{link:slug}', [SpaController::class, 'show']);
+Route::get('{link:slug}', [SpaController::class, 'show']);

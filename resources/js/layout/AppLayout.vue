@@ -2,6 +2,7 @@
 import {onMounted} from "vue";
 import {useAuthStore} from "../store/auth";
 import Navbar from "../components/Navbar.vue";
+import LinkModal from "../components/LinkModal.vue";
 
 const auth = useAuthStore();
 
@@ -15,6 +16,7 @@ onMounted(() => {
     <main>
         <router-view/>
     </main>
+    <LinkModal />
 </template>
 
 

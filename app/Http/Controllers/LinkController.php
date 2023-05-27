@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LinkController extends Controller
 {
@@ -18,7 +19,7 @@ class LinkController extends Controller
     {
         $links = Link::query()
             ->userAuth(auth()->id())
-            ->paginate(10)
+            ->paginate(4)
             ->withQueryString();
 
         return response()->json($links);
@@ -28,11 +29,11 @@ class LinkController extends Controller
     {
         $this->request->validate([
             'url' => ['required', 'url'],
-            'slug' => ['min:6', 'max:8', 'string'],
+            'slug' => ['min:6', 'max:8', 'string', Rule::unique(Link::class)],
         ]);
 
         $link = new Link;
-        $link->fill($this->request->validated());
+        $link->fill($this->request->all());
         $link->save();
 
         return response()->json($link);
@@ -41,7 +42,7 @@ class LinkController extends Controller
     public function show(Link $link)
     {
         if ($link->user_id !== auth()->id()) {
-                return response()->json(['message' => 'Not found'], 404);
+            return response()->json(['message' => 'Not found'], 404);
         }
 
         return response()->json($link);
@@ -50,15 +51,15 @@ class LinkController extends Controller
     public function update(Link $link)
     {
         if ($link->user_id !== auth()->id()) {
-                return response()->json(['message' => 'Not found'], 404);
+            return response()->json(['message' => 'Not found'], 404);
         }
 
         $this->request->validate([
             'url' => ['required', 'url'],
-            'slug' => ['min:6', 'max:8', 'string'],
+            'slug' => ['required', 'min:6', 'max:8', 'string', Rule::unique(Link::class)->ignore($link->id)],
         ]);
 
-        $link->fill($this->request->validated());
+        $link->fill($this->request->all());
         $link->save();
 
         return response()->json($link);
@@ -67,7 +68,7 @@ class LinkController extends Controller
     public function destroy(Link $link)
     {
         if ($link->user_id !== auth()->id()) {
-                return response()->json(['message' => 'Not found'], 404);
+            return response()->json(['message' => 'Not found'], 404);
         }
 
         $link->delete();

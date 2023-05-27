@@ -1,5 +1,7 @@
 <script setup>
-import {HomeIcon, ChartBarIcon, TrashIcon, AdjustmentsVerticalIcon, ArrowsUpDownIcon} from '@heroicons/vue/24/outline';
+import {HomeIcon, ChartBarIcon, TrashIcon, AdjustmentsVerticalIcon, ArrowsUpDownIcon, PlusIcon} from '@heroicons/vue/24/outline';
+import {useLinkStore} from "../store/link";
+const links = useLinkStore();
 </script>
 
 <template>
@@ -15,6 +17,7 @@ import {HomeIcon, ChartBarIcon, TrashIcon, AdjustmentsVerticalIcon, ArrowsUpDown
                 </router-link>
                 <ChartBarIcon class="h-5 w-5 mr-2 text-gray-400" aria-hidden="true"/>
                 <TrashIcon class="h-5 w-5 mr-2 text-gray-400" aria-hidden="true"/>
+                <PlusIcon @click.prevent="links.addModalOpen()" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer" aria-hidden="true"/>
             </div>
             <div class="flex items-center gap-x-4">
                 <ArrowsUpDownIcon class="h-5 w-5 mr-2 text-gray-400" aria-hidden="true"/>
