@@ -12,6 +12,7 @@ if (localStorage.getItem('accessToken')) {
 
 export const useLinkStore = defineStore('link', {
     state: () => ({
+        search: '',
         pagination: {},
         data: {},
         errors: {},
@@ -23,20 +24,21 @@ export const useLinkStore = defineStore('link', {
             this.errors = {};
         },
         indexLinks() {
-            let current_page = this.pagination.current_page;
-            let page_num = current_page ? current_page : 1;
+            const page = this.pagination.current_page === 1 ? {} : {page: this.pagination.current_page};
+            const search = this.search === '' ? {} : {q: this.search};
             axios.get('/api/links', {
                 params: {
-                    page: page_num
+                    ...page,
+                    ...search
                 }
             }).then(response => {
                 this.pagination = response.data
             }).catch(error => {
-                useAuthStore().postLogout();
+                // useAuthStore().postLogout();
             });
         },
         storeLink() {
-            if(this.data.slug === '') delete this.data.slug;
+            if (this.data.slug === '') delete this.data.slug;
             axios.post(`/api/links`, this.data).then(response => {
                 this.modelOpen = false
                 this.indexLinks();
@@ -63,7 +65,7 @@ export const useLinkStore = defineStore('link', {
             });
         },
         updateLink() {
-            if(this.data.slug === '') delete this.data.slug;
+            if (this.data.slug === '') delete this.data.slug;
             axios.put(`/api/links/${this.data.id}`, this.data).then(response => {
                 this.modelOpen = false
                 this.indexLinks();

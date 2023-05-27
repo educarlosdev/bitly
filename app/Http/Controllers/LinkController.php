@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Link;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -19,6 +20,13 @@ class LinkController extends Controller
     {
         $links = Link::query()
             ->userAuth(auth()->id())
+            ->when($this->request->has('q') && $this->request->has('q') != '', function (Builder $builder) {
+                $builder->where(function (Builder $builder) {
+                    $builder->whereFullText(['url', 'slug'], "+{$this->request->q}", ['mode' => 'boolean'])
+                        ->orWhere('url', 'LIKE', "%{$this->request->q}%")
+                        ->orWhere('slug', 'LIKE', "%{$this->request->q}%");
+                });
+            })
             ->paginate(4)
             ->withQueryString();
 
