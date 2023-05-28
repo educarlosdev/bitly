@@ -96,7 +96,7 @@ const deleteUser = () => {
                                 <div class="mt-2">
                                     <input v-model="user.data.name" id="name" name="name" type="text"
                                            autocomplete="name" placeholder="Nome"
-                                           class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
+                                           class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6 placeholder-gray-300"/>
                                 </div>
                             </div>
 
@@ -137,7 +137,7 @@ const deleteUser = () => {
                                     <input v-model="auth.changePassword.current_password" id="current-password"
                                            name="current_password" type="password"
                                            autocomplete="current-password" placeholder="Senha atual"
-                                           class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
+                                           class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6 placeholder-gray-300"/>
                                 </div>
                                 <p v-if="auth.errors.current_password"
                                    class="mt-1 text-sm text-red-600 animate-in-left">
@@ -151,7 +151,7 @@ const deleteUser = () => {
                                     <input v-model="auth.changePassword.password" id="new-password" name="new_password"
                                            type="password"
                                            autocomplete="new-password" placeholder="Nova senha"
-                                           class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
+                                           class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6 placeholder-gray-300"/>
                                 </div>
                                 <p v-if="auth.errors.password" class="mt-1 text-sm text-red-600 animate-in-left">
                                     {{ auth.errors.password.join(" ") }}</p>
@@ -164,7 +164,7 @@ const deleteUser = () => {
                                     <input v-model="auth.changePassword.password_confirmation" id="confirm-password"
                                            name="confirm_password" type="password"
                                            autocomplete="new-password" placeholder="Confirme a nova senha"
-                                           class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6"/>
+                                           class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6 placeholder-gray-300"/>
                                 </div>
                                 <p v-if="auth.errors.password" class="mt-1 text-sm text-red-600 animate-in-left">
                                     {{ auth.errors.password.join(" ") }}</p>
