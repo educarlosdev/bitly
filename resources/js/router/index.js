@@ -8,6 +8,7 @@ import Register from "../pages/Register.vue";
 import ForgotPassword from "../pages/ForgotPassword.vue";
 import Dashboard from "../pages/Dashboard.vue";
 import Profile from "../pages/Profile.vue";
+import Report from "../pages/Report.vue";
 
 const routes = [
     {
@@ -18,6 +19,24 @@ const routes = [
                 path: 'admin/dashboard',
                 name: 'Dashboard',
                 component: Dashboard,
+                meta: {
+                    requiresAuth: true,
+                    routeLogin: 'Login'
+                }
+            },
+            {
+                path: 'admin/report',
+                name: 'Report',
+                component: Report,
+                meta: {
+                    requiresAuth: true,
+                    routeLogin: 'Login'
+                }
+            },
+            {
+                path: 'admin/report/:id',
+                name: 'ReportWithId',
+                component: Report,
                 meta: {
                     requiresAuth: true,
                     routeLogin: 'Login'

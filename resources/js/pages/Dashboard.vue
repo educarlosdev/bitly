@@ -2,17 +2,16 @@
 import {onMounted} from "vue";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import {
-    ChevronDownIcon,
     ArrowTrendingUpIcon,
     TrashIcon,
     EllipsisVerticalIcon,
     PencilIcon,
     LinkIcon,
-    DocumentDuplicateIcon, PlusIcon
+    DocumentDuplicateIcon
 } from '@heroicons/vue/24/outline';
 import Header from "../components/Header.vue";
 import Divider from "../components/Divider.vue";
-import Stats from "../components/Stats.vue";
+import StatsDashboard from "../components/StatsDashboard.vue";
 import {useLinkStore} from "../store/link";
 import Swal from "sweetalert2";
 import Pagination from "../components/Pagination.vue";
@@ -37,7 +36,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <Stats v-if="auth.showStats"/>
+    <StatsDashboard/>
     <Divider/>
     <Header/>
     <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -60,7 +59,9 @@ onMounted(() => {
                 <dl class="flex items-center justify-between gap-x-8">
                     <div class="hidden md:flex gap-x-2 pr-5">
                         <span class="text-gray-300 text-xs mr-0 mt-1">{{ link.views }}</span>
-                        <ArrowTrendingUpIcon class="h-4 w-4 text-gray-300 mr-3 ml-0 mt-1" aria-hidden="true"/>
+                        <router-link :to="{name: 'ReportWithId', params: {id: link.id}}" class="flex items-center justify-between gap-x-2">
+                            <ArrowTrendingUpIcon class="h-4 w-4 text-gray-300 mr-3 ml-0 mt-1 hover:h-5 hover:w-5 hover:text-sky-500" aria-hidden="true"/>
+                        </router-link>
                         <DocumentDuplicateIcon @click.prevent="copy(link.slug_url)" class="h-5 w-5 text-gray-500 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-500" aria-hidden="true"/>
                         <PencilIcon @click.prevent="links.editModalOpen(link)" class="h-5 w-5 text-gray-500 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-500" aria-hidden="true"/>
                         <TrashIcon @click.prevent="links.destroyLink(link)" class="h-5 w-5 text-gray-500 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-500" aria-hidden="true"/>

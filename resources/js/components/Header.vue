@@ -17,13 +17,15 @@ const searchFocus = () => {
                 <router-link :to="{name: 'Dashboard'}">
                     <HomeIcon class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
                 </router-link>
-                <ChartBarIcon @click.prevent="auth.showStats = !auth.showStats" :class="auth.showStats ? 'text-sky-400' : 'text-gray-400'" class="h-5 w-5 mr-2 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
-                <TrashIcon @click.prevent="links.destroyLinksAll()" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
-                <PlusIcon @click.prevent="links.addModalOpen()" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
+                <router-link :to="{name: 'Report'}">
+                    <ChartBarIcon  class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
+                </router-link>
+                <TrashIcon @click.prevent="links.destroyLinksAll()" v-if="$route.name === 'Dashboard'" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
+                <PlusIcon @click.prevent="links.addModalOpen()" v-if="$route.name === 'Dashboard'" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
             </div>
             <div class="flex items-center gap-x-4">
-                <ArrowsUpDownIcon @click.prevent="links.linkOrderModalOpen = true" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
-                <MagnifyingGlassIcon @click.prevent="searchFocus()" class="h-5 w-5 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
+                <ArrowsUpDownIcon @click.prevent="links.linkOrderModalOpen = true" v-if="$route.name === 'Dashboard'" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
+                <MagnifyingGlassIcon @click.prevent="searchFocus()" v-if="$route.name === 'Dashboard'" class="h-5 w-5 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
             </div>
         </nav>
     </header>

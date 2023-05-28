@@ -45,7 +45,7 @@ watch(
                     </div>
                     <div class="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
                         <div class="flex items-center px-6 py-4 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0">
-                            <div class="w-full">
+                            <div class="w-full" v-if="$route.name === 'Dashboard'">
                                 <label for="search" class="sr-only">Search</label>
                                 <div class="relative">
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -57,6 +57,7 @@ watch(
                                            placeholder="Search" type="search"/>
                                 </div>
                             </div>
+                            <div v-else class="py-6"></div>
                         </div>
                     </div>
                     <div class="flex items-center md:absolute md:inset-y-0 md:right-0 lg:hidden">
@@ -69,7 +70,7 @@ watch(
                         </PopoverButton>
                     </div>
                     <div class="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-                        <a href="#" @click.prevent="links.addModalOpen()"
+                        <a href="#" @click.prevent="links.addModalOpen()" v-if="$route.name === 'Dashboard'"
                            class="ml-5 flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2">
                             <span class="sr-only">Novo link</span>
                             <PlusIcon class="h-6 w-6" aria-hidden="true"/>

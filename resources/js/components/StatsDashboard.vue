@@ -13,8 +13,10 @@ onMounted(() => {
 <template>
     <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pt-10 pb-4">
         <div class="flex justify-between">
-            <h3 class="text-base leading-7 text-gray-400 font-bold uppercase">Stats</h3>
-            <h3 class="text-sky-400 font-light">See all</h3>
+            <h3 class="text-base leading-7 text-gray-400 font-bold uppercase">Métricas</h3>
+            <router-link :to="{name: 'Report'}">
+                <h3 class="text-sky-400 font-light">Ver tudo</h3>
+            </router-link>
         </div>
         <dl class="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-5">
             <div class="overflow-hidden rounded-lg px-4 py-5 shadow sm:p-6">
