@@ -108,6 +108,30 @@ export const useLinkStore = defineStore('link', {
                 }
             });
         },
+        destroyLinksAll() {
+            Swal.fire({
+                title: 'Você tem certeza?',
+                text: "Ao remover você perderá os dados de todos links!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Sim, Remover!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`/api/links/all`).then(response => {
+                        this.indexLinks();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deletado com sucesso!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }).catch(error => {
+                        useAuthStore().postLogout();
+                    });
+                }
+            });
+        },
         addModalOpen() {
             this.data = {};
             this.modelOpen = true

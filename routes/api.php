@@ -17,6 +17,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::delete('links/all', [LinkController::class, 'destroyAll']);
     Route::apiResource('links', LinkController::class);
     Route::apiResource('user', UserController::class)->except(['index', 'store', 'show']);
     Route::apiResource('avatar', AvatarController::class)->except(['index', 'show', 'update']);

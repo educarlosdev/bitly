@@ -19,7 +19,7 @@ class LinkController extends Controller
     public function index()
     {
         $links = Link::query()
-            ->userAuth(auth()->id())
+            ->userAuth($this->request->user()->id)
             ->when($this->request->has('q') && $this->request->has('q') != '', function (Builder $builder) {
                 $builder->where(function (Builder $builder) {
                     $builder->whereFullText(['url', 'slug'], "+{$this->request->q}", ['mode' => 'boolean'])
@@ -49,7 +49,7 @@ class LinkController extends Controller
 
     public function show(Link $link)
     {
-        if ($link->user_id !== auth()->id()) {
+        if ($link->user_id !== $this->request->user()->id) {
             return response()->json(['message' => 'Not found'], 404);
         }
 
@@ -58,7 +58,7 @@ class LinkController extends Controller
 
     public function update(Link $link)
     {
-        if ($link->user_id !== auth()->id()) {
+        if ($link->user_id !== $this->request->user()->id) {
             return response()->json(['message' => 'Not found'], 404);
         }
 
@@ -75,11 +75,18 @@ class LinkController extends Controller
 
     public function destroy(Link $link)
     {
-        if ($link->user_id !== auth()->id()) {
+        if ($link->user_id !== $this->request->user()->id) {
             return response()->json(['message' => 'Not found'], 404);
         }
 
         $link->delete();
+
+        return response()->json([], 204);
+    }
+
+    public function destroyAll()
+    {
+        $this->request->user()->links()->delete();
 
         return response()->json([], 204);
     }

@@ -14,7 +14,7 @@ const auth = useAuthStore();
                     <HomeIcon class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
                 </router-link>
                 <ChartBarIcon @click.prevent="auth.showStats = !auth.showStats" :class="auth.showStats ? 'text-sky-400' : 'text-gray-400'" class="h-5 w-5 mr-2 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
-                <TrashIcon class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
+                <TrashIcon @click.prevent="links.destroyLinksAll()" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
                 <PlusIcon @click.prevent="links.addModalOpen()" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
             </div>
             <div class="flex items-center gap-x-4">
