@@ -1,9 +1,13 @@
 <script setup>
-import {HomeIcon, ChartBarIcon, TrashIcon, AdjustmentsVerticalIcon, ArrowsUpDownIcon, PlusIcon} from '@heroicons/vue/24/outline';
+import {HomeIcon, ChartBarIcon, TrashIcon, MagnifyingGlassIcon, ArrowsUpDownIcon, PlusIcon} from '@heroicons/vue/24/outline';
 import {useLinkStore} from "../store/link";
 import {useAuthStore} from "../store/auth";
 const links = useLinkStore();
 const auth = useAuthStore();
+
+const searchFocus = () => {
+    document.getElementById('search').focus();
+}
 </script>
 
 <template>
@@ -19,7 +23,7 @@ const auth = useAuthStore();
             </div>
             <div class="flex items-center gap-x-4">
                 <ArrowsUpDownIcon class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
-                <AdjustmentsVerticalIcon class="h-5 w-5 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
+                <MagnifyingGlassIcon @click.prevent="searchFocus()" class="h-5 w-5 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
             </div>
         </nav>
     </header>
