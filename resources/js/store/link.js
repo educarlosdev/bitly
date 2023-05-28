@@ -22,10 +22,6 @@ export const useLinkStore = defineStore('link', {
         direction: 'DESC',
     }),
     actions: {
-        resetLink() {
-            this.data = {};
-            this.errors = {};
-        },
         indexLinks() {
             const page = this.pagination.current_page === 1 ? {} : {page: this.pagination.current_page};
             const search = this.search === '' ? {} : {q: this.search};

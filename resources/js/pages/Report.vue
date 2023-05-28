@@ -4,6 +4,12 @@ import Divider from "../components/Divider.vue";
 import StatsReport from "../components/StatsReport.vue";
 import {EyeSlashIcon} from "@heroicons/vue/24/outline";
 import Pagination from "../components/Pagination.vue";
+import {onMounted} from "vue";
+import {useHitStore} from "../store/hit";
+const hits = useHitStore();
+onMounted(() => {
+    hits.indexHits();
+});
 </script>
 
 <template>
@@ -11,29 +17,31 @@ import Pagination from "../components/Pagination.vue";
     <Divider />
     <Header />
     <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <ul v-if="0 > 0" role="list" class="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl">
-            <li v-for="item in 4" :key="item" class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6">
+        <ul v-if="hits.pagination.total > 0" role="list" class="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl">
+            <li v-for="item in hits.pagination.data" :key="item.id" class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6">
                 <div class="flex gap-x-4">
                     <div class="min-w-0 flex-auto">
-                        <p class="text-sm font-semibold leading-6 text-gray-900">
+                        <p class="text-sm font-semibold leading-6 text-gray-600">
                                 <span class="absolute inset-x-0 -top-px bottom-0" />
-                                Dispositivo
+                            {{ item.parse_user_agent.deviceModel }} <span class="text-gray-400">({{ item.parse_user_agent.platformFamily }})</span>
                         </p>
                         <p class="mt-1 flex text-xs leading-5 text-gray-500">
-                            IP
+                            {{ item.ip }}
                         </p>
                     </div>
                 </div>
                 <div class="flex items-center gap-x-4">
                     <div class="hidden sm:flex sm:flex-col sm:items-end">
-                        <p class="text-sm leading-6 text-gray-900">Navegador</p>
+                        <p class="text-sm leading-6 text-gray-900">
+                            {{ item.parse_user_agent.browserFamily }}
+                        </p>
                         <p class="mt-1 text-xs leading-5 text-gray-500">
-                            Clicado em <time datetime="2023-01-23T13:23Z">2023-01-23T13:23Z</time>
+                            Clicado há <time :datetime="item.created_at">{{ item.created_formatted }}</time>
                         </p>
                     </div>
                 </div>
             </li>
-<!--            <Pagination :pagination="links.pagination" v-if="links.pagination.total > links.pagination.per_page" @paginate="links.indexLinks()" />-->
+            <Pagination :pagination="hits.pagination" v-if="hits.pagination.total > hits.pagination.per_page" @paginate="hits.indexHits()" />
         </ul>
         <button v-else type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center text-gray-400 cursor-default">
             <EyeSlashIcon class="h-12 w-12 mx-auto" aria-hidden="true"/>
