@@ -16,7 +16,10 @@ export const useLinkStore = defineStore('link', {
         pagination: {},
         data: {},
         errors: {},
-        modelOpen: false
+        linkModalOpen: false,
+        linkOrderModalOpen: false,
+        order: 'created_at',
+        direction: 'DESC',
     }),
     actions: {
         resetLink() {
@@ -28,8 +31,10 @@ export const useLinkStore = defineStore('link', {
             const search = this.search === '' ? {} : {q: this.search};
             axios.get('/api/links', {
                 params: {
+                    order: this.order,
+                    direction: this.direction,
                     ...page,
-                    ...search
+                    ...search,
                 }
             }).then(response => {
                 this.pagination = response.data
@@ -40,7 +45,7 @@ export const useLinkStore = defineStore('link', {
         storeLink() {
             if (this.data.slug === '') delete this.data.slug;
             axios.post(`/api/links`, this.data).then(response => {
-                this.modelOpen = false
+                this.linkModalOpen = false
                 this.indexLinks();
                 this.errors = {};
                 Swal.fire({
@@ -67,7 +72,7 @@ export const useLinkStore = defineStore('link', {
         updateLink() {
             if (this.data.slug === '') delete this.data.slug;
             axios.put(`/api/links/${this.data.id}`, this.data).then(response => {
-                this.modelOpen = false
+                this.linkModalOpen = false
                 this.indexLinks();
                 this.errors = {};
                 Swal.fire({
@@ -134,11 +139,11 @@ export const useLinkStore = defineStore('link', {
         },
         addModalOpen() {
             this.data = {};
-            this.modelOpen = true
+            this.linkModalOpen = true
         },
         editModalOpen(payload) {
             this.data = JSON.parse(JSON.stringify(payload));
-            this.modelOpen = true
+            this.linkModalOpen = true
         }
     }
 })

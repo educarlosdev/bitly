@@ -22,7 +22,7 @@ const searchFocus = () => {
                 <PlusIcon @click.prevent="links.addModalOpen()" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
             </div>
             <div class="flex items-center gap-x-4">
-                <ArrowsUpDownIcon class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
+                <ArrowsUpDownIcon @click.prevent="links.linkOrderModalOpen = true" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
                 <MagnifyingGlassIcon @click.prevent="searchFocus()" class="h-5 w-5 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
             </div>
         </nav>

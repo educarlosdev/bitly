@@ -20,12 +20,24 @@ class LinkController extends Controller
     {
         $links = Link::query()
             ->userAuth($this->request->user()->id)
-            ->when($this->request->has('q') && $this->request->has('q') != '', function (Builder $builder) {
+            ->when($this->request->has('q') && $this->request->get('q') != '', function (Builder $builder) {
                 $builder->where(function (Builder $builder) {
                     $builder->whereFullText(['url', 'slug'], "+{$this->request->q}", ['mode' => 'boolean'])
                         ->orWhere('url', 'LIKE', "%{$this->request->q}%")
                         ->orWhere('slug', 'LIKE', "%{$this->request->q}%");
                 });
+            })
+            ->when($this->request->has('order')
+                && $this->request->get('order') != ''
+                && $this->request->has('direction')
+                && $this->request->get('direction') != '', function (Builder $builder) {
+                $builder->orderBy($this->request->get('order'), $this->request->get('direction'));
+            })
+            ->when((!$this->request->has('order')
+                || $this->request->get('order') == '')
+                || (!$this->request->has('direction')
+                || $this->request->get('direction') == ''), function (Builder $builder) {
+                $builder->orderByDesc('created_at');
             })
             ->paginate(4)
             ->withQueryString();

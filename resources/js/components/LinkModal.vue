@@ -8,8 +8,8 @@ const url = document.location.origin;
 </script>
 
 <template>
-    <TransitionRoot as="template" :show="links.modelOpen">
-        <Dialog as="div" class="relative z-10" @close="links.modelOpen = false">
+    <TransitionRoot as="template" :show="links.linkModalOpen">
+        <Dialog as="div" class="relative z-10" @close="links.linkModalOpen = false">
             <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
             </TransitionChild>
@@ -41,7 +41,7 @@ const url = document.location.origin;
                             <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                                 <button v-if="links.data.id" type="button" class="inline-flex w-full justify-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 sm:ml-3 sm:w-auto" @click="links.updateLink()">Salvar</button>
                                 <button v-else type="button" class="inline-flex w-full justify-center rounded-md bg-sky-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 sm:ml-3 sm:w-auto" @click="links.storeLink()">Cadastrar</button>
-                                <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" @click="links.modelOpen = false" ref="cancelButtonRef">Fechar</button>
+                                <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" @click="links.linkModalOpen = false" ref="cancelButtonRef">Fechar</button>
                             </div>
                         </DialogPanel>
                     </TransitionChild>
