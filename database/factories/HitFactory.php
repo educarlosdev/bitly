@@ -12,8 +12,10 @@ class HitFactory extends Factory
 
     public function definition()
     {
+        $link = Link::query()->inRandomOrder()->first();
+        $link->increment('views');
         return [
-            'link_id' => Link::query()->inRandomOrder()->first()->id,
+            'link_id' => $link->id,
             'ip' => $this->faker->ipv4(),
             'user_agent' => $this->faker->userAgent(),
         ];

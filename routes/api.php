@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +18,10 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('dashboard/metrics', DashboardController::class);
     Route::delete('links/all', [LinkController::class, 'destroyAll']);
+
+    Route::apiResource('avatar', AvatarController::class)->except(['index', 'show', 'update']);
     Route::apiResource('links', LinkController::class);
     Route::apiResource('user', UserController::class)->except(['index', 'store', 'show']);
-    Route::apiResource('avatar', AvatarController::class)->except(['index', 'show', 'update']);
 });
