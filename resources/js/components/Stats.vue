@@ -58,7 +58,7 @@ onMounted(() => {
                     <EyeIcon class="h-6 w-6 text-gray-400" aria-hidden="true"/>
                     <div>
                         <dd class="mt-1 text-2xl font-semibold tracking-tight text-gray-900">{{ dashboard.metrics.hour_views }}</dd>
-                        <dt class="truncate text-sm font-light text-gray-400">Agora</dt>
+                        <dt class="truncate text-sm font-light text-gray-400">Última hora</dt>
                     </div>
                 </div>
             </div>
