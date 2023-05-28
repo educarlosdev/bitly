@@ -14,7 +14,9 @@ import Stats from "../components/Stats.vue";
 import {useLinkStore} from "../store/link";
 import Swal from "sweetalert2";
 import Pagination from "../components/Pagination.vue";
+import {useAuthStore} from "../store/auth";
 
+const auth = useAuthStore();
 const links = useLinkStore();
 
 const copy = (payload) => {
@@ -33,7 +35,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <Stats />
+    <Stats v-if="auth.showStats"/>
     <Divider/>
     <Header/>
     <div class="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">

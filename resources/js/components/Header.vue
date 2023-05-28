@@ -1,31 +1,25 @@
 <script setup>
 import {HomeIcon, ChartBarIcon, TrashIcon, AdjustmentsVerticalIcon, ArrowsUpDownIcon, PlusIcon} from '@heroicons/vue/24/outline';
 import {useLinkStore} from "../store/link";
+import {useAuthStore} from "../store/auth";
 const links = useLinkStore();
+const auth = useAuthStore();
 </script>
 
 <template>
-    <header class="">
+    <header class="h-16">
         <nav class="mx-auto flex max-w-4xl items-center justify-between p-6 lg:px-8" aria-label="Global">
             <div class="flex items-center gap-x-4">
                 <router-link :to="{name: 'Dashboard'}">
-                    <div
-                        class="flex rounded p-1 font-extralight bg-gray-200 text-sky-400 hover:bg-white houver:text-sky-800">
-                        <HomeIcon class="h-5 w-5 mr-2 mt-0.5" aria-hidden="true"/>
-                        Home
-                    </div>
+                    <HomeIcon class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
                 </router-link>
-                <ChartBarIcon class="h-5 w-5 mr-2 text-gray-400" aria-hidden="true"/>
+                <ChartBarIcon @click.prevent="auth.showStats = !auth.showStats" :class="auth.showStats ? 'text-sky-400' : 'text-gray-400'" class="h-5 w-5 mr-2 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
                 <TrashIcon class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
                 <PlusIcon @click.prevent="links.addModalOpen()" class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
             </div>
             <div class="flex items-center gap-x-4">
-                <ArrowsUpDownIcon class="h-5 w-5 mr-2 text-gray-400" aria-hidden="true"/>
-                <div
-                    class="flex rounded p-1 bg-gray-200 text-gray-400 font-extralight">
-                    <AdjustmentsVerticalIcon class="h-5 w-5 mr-2 mt-0.5" aria-hidden="true"/>
-                    Filters
-                </div>
+                <ArrowsUpDownIcon class="h-5 w-5 mr-2 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
+                <AdjustmentsVerticalIcon class="h-5 w-5 text-gray-400 cursor-pointer hover:h-6 hover:w-6 hover:text-sky-400" aria-hidden="true"/>
             </div>
         </nav>
     </header>
