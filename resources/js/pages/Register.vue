@@ -12,7 +12,7 @@ onMounted(() => {
 
 <template>
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img class="mx-auto h-10 w-auto" src="/images/icon.png"
+        <img class="mx-auto h-10 w-auto" src="../../assets/images/icon.png"
              alt="Bitly"/>
         <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Faça o cadastro da sua
             conta</h2>
