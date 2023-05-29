@@ -2,7 +2,12 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "build:digitalocean": "yarn install --production=false && yarn build && rm -rf node_modules && yarn install --production --frozen-lockfile"
+    },
+    "engines": {
+        "node": "^14.18.0",
+        "yarn": "^1.22.0"
     },
     "devDependencies": {
         "@lottiefiles/lottie-player": "^1.7.1",
