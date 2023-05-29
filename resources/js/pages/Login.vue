@@ -40,11 +40,11 @@ onMounted(() => {
             <div>
                 <div class="flex items-center justify-between">
                     <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Senha</label>
-                    <div class="text-sm">
-                        <router-link :to="{name: 'ForgotPassword'}"
-                                     class="font-semibold text-sky-600 hover:text-sky-500">Esqueceu sua senha?
-                        </router-link>
-                    </div>
+<!--                    <div class="text-sm">-->
+<!--                        <router-link :to="{name: 'ForgotPassword'}"-->
+<!--                                     class="font-semibold text-sky-600 hover:text-sky-500">Esqueceu sua senha?-->
+<!--                        </router-link>-->
+<!--                    </div>-->
                 </div>
                 <div class="mt-2">
                     <div class="relative">

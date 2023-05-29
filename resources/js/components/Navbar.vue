@@ -2,7 +2,7 @@
 
 import {Menu, MenuButton, MenuItem, MenuItems, Popover, PopoverButton, PopoverPanel} from "@headlessui/vue";
 import {MagnifyingGlassIcon} from "@heroicons/vue/20/solid";
-import {Bars3Icon, BellIcon, PlusIcon, XMarkIcon, ChevronDownIcon} from "@heroicons/vue/24/outline";
+import {Bars3Icon, PlusIcon, XMarkIcon, ChevronDownIcon} from "@heroicons/vue/24/outline";
 import {useAuthStore} from "../store/auth";
 import {useLinkStore} from "../store/link";
 import {watch} from "vue";
@@ -118,11 +118,6 @@ const doSearchHits = () => {
                             <span class="sr-only">Novo link</span>
                             <PlusIcon class="h-6 w-6" aria-hidden="true"/>
                         </a>
-                        <a href="#"
-                           class="ml-5 flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2">
-                            <span class="sr-only">Ver notificações</span>
-                            <BellIcon class="h-6 w-6" aria-hidden="true"/>
-                        </a>
 
                         <!-- Profile dropdown -->
                         <Menu as="div" class="relative ml-5 flex-shrink-0">
@@ -191,11 +186,6 @@ const doSearchHits = () => {
                             <div class="text-base font-medium text-gray-800">{{ auth.me.name }}</div>
                             <div class="text-sm font-medium text-gray-500">{{ auth.me.email }}</div>
                         </div>
-                        <button type="button"
-                                class="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2">
-                            <span class="sr-only">View notifications</span>
-                            <BellIcon class="h-6 w-6" aria-hidden="true"/>
-                        </button>
                     </div>
                     <div class="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
                         <router-link v-for="item in userNavigation" :key="item.name" :to="item.to"
