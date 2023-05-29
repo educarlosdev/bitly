@@ -98,6 +98,9 @@ const deleteUser = () => {
                                            autocomplete="name" placeholder="Nome"
                                            class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6 placeholder-gray-300"/>
                                 </div>
+                                <p v-if="user.errors.name"
+                                   class="mt-1 text-sm text-red-600 animate-in-left">
+                                    {{ user.errors.name.join(" ") }}</p>
                             </div>
 
                             <div class="col-span-full">

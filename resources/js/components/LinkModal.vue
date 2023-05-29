@@ -26,6 +26,8 @@ const url = document.location.origin;
                                     <div class="mt-2">
                                         <input v-model="links.data.url" id="url" name="url" type="url" autocomplete="url" class="block w-full rounded-md border-0 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-500 focus:ring-2 focus:ring-inset focus:ring-sky-500 sm:text-sm sm:leading-6 placeholder-gray-300" placeholder="https://google.com.br" />
                                     </div>
+                                    <p v-if="links.errors.url" class="mt-1 text-sm text-red-600 animate-in-left">
+                                        {{ links.errors.url.join(" ") }}</p>
                                 </div>
 
                                 <div class="col-span-full">
@@ -36,6 +38,8 @@ const url = document.location.origin;
                                             <input v-model="links.data.slug" type="text" name="slug" id="slug" autocomplete="slug" class="flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-500 focus:ring-0 sm:text-sm sm:leading-6 placeholder-gray-300" placeholder="eduardo" />
                                         </div>
                                     </div>
+                                    <p v-if="links.errors.slug" class="mt-1 text-sm text-red-600 animate-in-left">
+                                        {{ links.errors.slug.join(" ") }}</p>
                                 </div>
                             </div>
                             <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">

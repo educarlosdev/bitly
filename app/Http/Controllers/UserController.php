@@ -17,7 +17,7 @@ class UserController extends Controller
     public function update(User $user)
     {
         $this->request->validate([
-            'name' => ['string', 'max:255'],
+            'name' => ['required', 'max:255'],
         ]);
 
         $user->fill($this->request->only('name'));
