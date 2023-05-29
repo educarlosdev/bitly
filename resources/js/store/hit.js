@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import axios from "axios";
 import {useAuthStore} from "./auth";
+import Swal from "sweetalert2";
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -23,6 +24,13 @@ export const useHitStore = defineStore('hit', {
             const page = this.pagination.current_page === 1 ? {} : {page: this.pagination.current_page};
             const search = this.search === '' ? {} : {q: this.search};
             const exporting = this.export ? {export: true} : {};
+            if(this.export) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Exportando...',
+                    showConfirmButton: false
+                });
+            }
             axios.get('/api/hits', {
                 params: {
                     order: this.order,
@@ -35,6 +43,7 @@ export const useHitStore = defineStore('hit', {
                 if (this.export) {
                     window.open(response.data, '_blank').focus();
                     this.export = false;
+                    Swal.close();
                 } else {
                     this.pagination = response.data
                 }
@@ -47,6 +56,13 @@ export const useHitStore = defineStore('hit', {
             const page = this.pagination.current_page === 1 ? {} : {page: this.pagination.current_page};
             const search = this.search === '' ? {} : {q: this.search};
             const exporting = this.export ? {export: true} : {};
+            if(this.export) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Exportando...',
+                    showConfirmButton: false
+                });
+            }
             axios.get(`/api/hits/${payload}`, {
                 params: {
                     order: this.order,
@@ -59,6 +75,7 @@ export const useHitStore = defineStore('hit', {
                 if (this.export) {
                     window.open(response.data, '_blank').focus();
                     this.export = false;
+                    Swal.close();
                 } else {
                     this.pagination = response.data
                 }

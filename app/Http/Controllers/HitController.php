@@ -67,7 +67,8 @@ class HitController extends Controller
 
     private function __export($data)
     {
-        (new FastExcel($data))->export("{$this->request->user()->id}.xlsx", function ($hit) {
+        if (!Storage::disk('public')->exists('temp')) Storage::disk('public')->makeDirectory('temp');
+        (new FastExcel($data))->export(Storage::disk('public')->path("temp/{$this->request->user()->id}.xlsx"), function ($hit) {
             $userAgent = collect($hit->parse_user_agent)->toArray();
             return [
                 'IP' => $hit->ip,
@@ -76,8 +77,6 @@ class HitController extends Controller
                 'Evento' => "Há {$hit->created_formatted}",
             ];
         });
-
-        rename(public_path("{$this->request->user()->id}.xlsx"), Storage::disk('public')->path("temp/{$this->request->user()->id}.xlsx"));
 
         return Storage::disk('public')->url("temp/{$this->request->user()->id}.xlsx");
     }
