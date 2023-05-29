@@ -23,9 +23,11 @@
         "vue-router": "^4.2.1"
     },
     "dependencies": {
+        "@esbuild/darwin-x64": "^0.17.19",
         "@headlessui/vue": "^1.7.13",
         "@heroicons/vue": "^2.0.18",
         "autoprefixer": "^10.4.14",
+        "postcss": "^8.4.24",
         "vue": "^3.3.4"
     }
 }
