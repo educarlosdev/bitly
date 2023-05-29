@@ -31,6 +31,8 @@ const copy = (payload) => {
 }
 
 onMounted(() => {
+    links.pagination.current_page = 1;
+    links.search = '';
     links.indexLinks();
 });
 </script>

@@ -6,9 +6,17 @@ import {EyeSlashIcon} from "@heroicons/vue/24/outline";
 import Pagination from "../components/Pagination.vue";
 import {onMounted} from "vue";
 import {useHitStore} from "../store/hit";
+import {useRoute} from "vue-router";
 const hits = useHitStore();
+const route = useRoute();
 onMounted(() => {
-    hits.indexHits();
+    hits.pagination.current_page = 1;
+    hits.search = '';
+    if (route.params.id) {
+        hits.showHit(route.params.id);
+    } else {
+        hits.indexHits();
+    }
 });
 </script>
 
@@ -23,7 +31,7 @@ onMounted(() => {
                     <div class="min-w-0 flex-auto">
                         <p class="text-sm font-semibold leading-6 text-gray-600">
                                 <span class="absolute inset-x-0 -top-px bottom-0" />
-                            {{ item.parse_user_agent.deviceModel }} <span class="text-gray-400">({{ item.parse_user_agent.platformFamily }})</span>
+                            {{ item.parse_user_agent.platformFamily }}
                         </p>
                         <p class="mt-1 flex text-xs leading-5 text-gray-500">
                             {{ item.ip }}

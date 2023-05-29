@@ -6,9 +6,11 @@ import {Bars3Icon, BellIcon, PlusIcon, XMarkIcon, ChevronDownIcon} from "@heroic
 import {useAuthStore} from "../store/auth";
 import {useLinkStore} from "../store/link";
 import {watch} from "vue";
+import {useHitStore} from "../store/hit";
 
 const auth = useAuthStore();
 const links = useLinkStore();
+const hits = useHitStore();
 
 const navigation = [
     {name: 'Dashboard', to: {name: 'Dashboard'}, current: true},
@@ -24,6 +26,15 @@ watch(
             links.indexLinks();
         }
     }
+)
+
+watch(
+    () => hits.search,
+    (search) => {
+        if (search === '') {
+            hits.indexHits();
+        }
+    },
 )
 </script>
 
@@ -52,7 +63,19 @@ watch(
                                         <MagnifyingGlassIcon class="h-5 w-5 text-gray-400" aria-hidden="true"/>
                                     </div>
                                     <input v-model.trim="links.search"
-                                           @keyup.enter.exact="links.indexLinks()" id="search" name="search"
+                                           @keyup.enter.exact="links.pagination.current_page = 1; links.indexLinks();" id="search" name="search"
+                                           class="block w-full rounded-md border-0 bg-gray-100 py-3 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-400 sm:text-sm sm:leading-6"
+                                           placeholder="Search" type="search"/>
+                                </div>
+                            </div>
+                            <div class="w-full" v-if="['Report', 'ReportWithId'].includes($route.name)">
+                                <label for="search" class="sr-only">Search</label>
+                                <div class="relative">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <MagnifyingGlassIcon class="h-5 w-5 text-gray-400" aria-hidden="true"/>
+                                    </div>
+                                    <input v-model.trim="hits.search"
+                                           @keyup.enter.exact="hits.pagination.current_page = 1; hits.indexHits();" id="search" name="search"
                                            class="block w-full rounded-md border-0 bg-gray-100 py-3 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-400 sm:text-sm sm:leading-6"
                                            placeholder="Search" type="search"/>
                                 </div>

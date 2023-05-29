@@ -111,8 +111,8 @@ export const useLinkStore = defineStore('link', {
         },
         destroyLinksAll() {
             Swal.fire({
-                title: 'Você tem certeza que deseja excluir todos os link?',
-                text: "Ao excluir você perderá os dados de todos links!",
+                title: 'Você tem certeza que deseja excluir TODOS os link?',
+                text: "Ao excluir você perderá os dados de TODOS links!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',

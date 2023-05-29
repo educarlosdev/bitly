@@ -16,27 +16,36 @@ export const useHitStore = defineStore('hit', {
         hitOrderModalOpen: false,
         order: 'created_at',
         direction: 'DESC',
+        export: false,
     }),
     actions: {
         indexHits() {
             const page = this.pagination.current_page === 1 ? {} : {page: this.pagination.current_page};
             const search = this.search === '' ? {} : {q: this.search};
+            const exporting = this.export ? {export: true} : {};
             axios.get('/api/hits', {
                 params: {
                     order: this.order,
                     direction: this.direction,
                     ...page,
                     ...search,
+                    ...exporting,
                 }
             }).then(response => {
-                this.pagination = response.data
+                if (this.export) {
+                    window.open(response.data, '_blank').focus();
+                    this.export = false;
+                } else {
+                    this.pagination = response.data
+                }
             }).catch(error => {
+                this.export = false;
                 // useAuthStore().postLogout();
             });
         },
         showHit(payload) {
             axios.get(`/api/hits/${payload}`).then(response => {
-                this.data = response.data
+                this.pagination = response.data
             }).catch(error => {
                 useAuthStore().postLogout();
             });
