@@ -104,7 +104,7 @@ onMounted(() => {
                     </div>
                 </dl>
             </li>
-            <Pagination :pagination="links.pagination" v-if="links.pagination.total > links.pagination.per_page" @paginate="links.indexLinks()" />
+            <Pagination :pagination="links.pagination" @paginate="links.indexLinks()" />
         </ul>
         <button v-else @click.prevent="links.addModalOpen()" type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center text-gray-400 hover:border-sky-400 hover:text-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
             <LinkIcon class="h-12 w-12 mx-auto" aria-hidden="true"/>

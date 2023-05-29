@@ -41,7 +41,7 @@ onMounted(() => {
                     </div>
                 </div>
             </li>
-            <Pagination :pagination="hits.pagination" v-if="hits.pagination.total > hits.pagination.per_page" @paginate="hits.indexHits()" />
+            <Pagination :pagination="hits.pagination" @paginate="hits.indexHits()" />
         </ul>
         <button v-else type="button" class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center text-gray-400 cursor-default">
             <EyeSlashIcon class="h-12 w-12 mx-auto" aria-hidden="true"/>
