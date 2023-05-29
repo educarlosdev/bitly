@@ -71,13 +71,19 @@ Siga as etapas abaixo para executar este aplicativo localmente
     php artisan migrate
     ```
 
-3. Como passo não obrigatório, caso queira popular a base de dados com informações fake utilizar o seguinte comando:
+3. Rode o comando do `artisan storage` para gerar o link simbólico para pasta storage
+
+    ```bash
+    php artisan storage:link
+    ```
+
+4. Como passo não obrigatório, caso queira popular a base de dados com informações fake utilizar o seguinte comando:
 
     ```bash
     php artisan db:seed
     ```
 
-3. Instalar os pacotes com `yarn` ou `npm`:
+5. Instalar os pacotes com `yarn` ou `npm`:
 
     ```
     yarn install
@@ -85,7 +91,7 @@ Siga as etapas abaixo para executar este aplicativo localmente
     npm run install
     ```
 
-4.  Em ambiente sem Docker rode:
+6.  Em ambiente sem Docker rode:
 
     ```bash
     php artisan serve
@@ -93,7 +99,7 @@ Siga as etapas abaixo para executar este aplicativo localmente
     yarn dev
     ```
 
-1.  Em ambiente com Docker rode:
+7.  Em ambiente com Docker rode:
 
     ```bash
     docker-compose up --build -d
@@ -101,7 +107,7 @@ Siga as etapas abaixo para executar este aplicativo localmente
     docker exec -it [container_name] yarn dev
     ```
 
-1.  Aos optantes do [Laravel Sail](https://laravel.com/docs/10.x/sail):
+8.  Aos optantes do [Laravel Sail](https://laravel.com/docs/10.x/sail):
 
     ```bash
     ./vendor/bin/sail up -d
@@ -109,5 +115,5 @@ Siga as etapas abaixo para executar este aplicativo localmente
     ./vendor/bin/sail yarn dev
     ```
 
-1.  Abra seu navegador e visite localhost: [http://127.0.0.1:8000](http://127.0.0.1:8000).
+9.  Abra seu navegador e visite localhost: [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
