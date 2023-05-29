@@ -6,6 +6,9 @@ A referência e inspiração de UI foi do [DDSV Link Shortener](https://dribbble
 
 Demo URL: **[https://bitly.eduardocarlos.com.br](https://bitly.eduardocarlos.com.br)**
 
+###### E-mail: test@example.com
+###### Senha: password
+
 
 ### Tech Stack
 
