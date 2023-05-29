@@ -40,13 +40,30 @@ export const useHitStore = defineStore('hit', {
                 }
             }).catch(error => {
                 this.export = false;
-                // useAuthStore().postLogout();
+                useAuthStore().postLogout();
             });
         },
         showHit(payload) {
-            axios.get(`/api/hits/${payload}`).then(response => {
-                this.pagination = response.data
+            const page = this.pagination.current_page === 1 ? {} : {page: this.pagination.current_page};
+            const search = this.search === '' ? {} : {q: this.search};
+            const exporting = this.export ? {export: true} : {};
+            axios.get(`/api/hits/${payload}`, {
+                params: {
+                    order: this.order,
+                    direction: this.direction,
+                    ...page,
+                    ...search,
+                    ...exporting,
+                }
+            }).then(response => {
+                if (this.export) {
+                    window.open(response.data, '_blank').focus();
+                    this.export = false;
+                } else {
+                    this.pagination = response.data
+                }
             }).catch(error => {
+                this.export = false;
                 useAuthStore().postLogout();
             });
         },
