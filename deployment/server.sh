@@ -183,6 +183,7 @@ supervisorctl restart bitly.eduardocarlos.com.br-cron:*
 yarn --cwd /var/www/html/bitly.eduardocarlos.com.br install
 yarn --cwd /var/www/html/bitly.eduardocarlos.com.br build
 rm -r /var/www/html/bitly.eduardocarlos.com.br/node_modules
+chmod -R 775 /var/www/html/bitly.eduardocarlos.com.br
 " > /var/www/git/bitly.eduardocarlos.com.br.git/hooks/post-receive
 
 chmod +x /var/www/git/bitly.eduardocarlos.com.br.git/hooks/post-receive
