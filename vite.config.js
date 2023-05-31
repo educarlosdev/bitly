@@ -7,9 +7,7 @@ export default defineConfig({
         splitVendorChunkPlugin(),
         vue({
             template: {
-                compilerOptions: {
-                    isCustomElement: (tag) => ['lottie-player'].includes(tag),
-                }
+                compilerOptions: {}
             }
         }),
         laravel({
